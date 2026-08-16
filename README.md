@@ -4,6 +4,8 @@ Gather is a warm, bilingual social-experience prototype for German- and Persian-
 
 The visual system uses restrained indigo, coral and teal accents, warm backgrounds, soft elevation and generous spacing. Experience cards show social context and trust without exposing private participant information. German uses a left-to-right layout with Manrope; Persian uses a fully mirrored right-to-left layout with Vazirmatn.
 
+[https://jahanalem.github.io/gather](https://jahanalem.github.io/gather)
+
 ## Project structure
 
 ```text
