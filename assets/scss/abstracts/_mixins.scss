@@ -1,0 +1,31 @@
+@use "variables" as *;
+
+@mixin container {
+  width: min(100% - 2rem, #{$container});
+  margin-inline: auto;
+}
+
+@mixin focus-ring {
+  outline: none;
+  box-shadow: $shadow-focus;
+}
+
+@mixin card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+}
+
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+}
+
+@mixin from($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}

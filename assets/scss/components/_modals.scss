@@ -1,0 +1,107 @@
+@use "../abstracts/variables" as *;
+
+.modal,
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  background: rgba(23, 20, 38, 0.52);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.modal {
+  place-items: center;
+  padding: 1rem;
+}
+
+.modal.is-open,
+.drawer.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal__dialog {
+  width: min(100%, 520px);
+  max-height: calc(100vh - 2rem);
+  padding: 1.5rem;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  transform: translateY(16px) scale(0.98);
+  transition: transform 180ms ease;
+}
+
+.modal.is-open .modal__dialog {
+  transform: none;
+}
+
+.modal__header,
+.drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-end: 1rem;
+}
+
+.drawer {
+  justify-items: end;
+}
+
+.drawer__panel {
+  width: min(92vw, 420px);
+  height: 100%;
+  padding: 1.25rem;
+  overflow-y: auto;
+  background: #fff;
+  transform: translateX(110%);
+  transition: transform 220ms ease;
+}
+
+html[dir="rtl"] .drawer__panel {
+  transform: translateX(-110%);
+}
+
+.drawer.is-open .drawer__panel,
+html[dir="rtl"] .drawer.is-open .drawer__panel {
+  transform: none;
+}
+
+.accordion {
+  border-block: 1px solid $color-border;
+}
+
+.accordion__button {
+  display: flex;
+  width: 100%;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  color: $color-text;
+  font-weight: 750;
+  text-align: start;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.accordion__button svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 180ms ease;
+}
+
+.accordion__button[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.accordion__panel {
+  padding-block-end: 1rem;
+  color: $color-text-soft;
+}

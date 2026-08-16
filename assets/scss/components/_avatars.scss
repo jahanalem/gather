@@ -1,0 +1,62 @@
+@use "../abstracts/variables" as *;
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  background: $color-primary-soft;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.avatar--sm {
+  width: 34px;
+  height: 34px;
+}
+
+.avatar--lg {
+  width: 76px;
+  height: 76px;
+}
+
+.avatar--xl {
+  width: clamp(94px, 18vw, 132px);
+  height: clamp(94px, 18vw, 132px);
+}
+
+.avatar-group {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 8px;
+}
+
+.avatar-group .avatar,
+.avatar-group__more {
+  margin-inline-start: -8px;
+}
+
+.avatar-group__more {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: $color-primary-dark;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: $color-primary-soft;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.profile-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.profile-heading__body {
+  display: grid;
+  flex: 1;
+  gap: 0.45rem;
+}

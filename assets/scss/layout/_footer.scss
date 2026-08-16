@@ -1,0 +1,62 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.site-footer {
+  padding-block: 3.5rem 6rem;
+  color: #e7e5ff;
+  background: #242038;
+
+  @include from(900px) {
+    padding-block-end: 2rem;
+  }
+}
+
+.site-footer__grid {
+  @include container;
+  display: grid;
+  gap: $space-4;
+
+  @include from(760px) {
+    grid-template-columns: 1.5fr repeat(3, 1fr);
+  }
+}
+
+.site-footer .wordmark {
+  color: #fff;
+}
+
+.site-footer__intro {
+  display: grid;
+  gap: 1rem;
+  max-width: 380px;
+}
+
+.site-footer h2 {
+  font-size: 1rem;
+}
+
+.site-footer ul {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer a {
+  color: #c7c4da;
+  font-size: 0.92rem;
+}
+
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.site-footer__bottom {
+  @include container;
+  padding-block-start: 2rem;
+  margin-block-start: 2rem;
+  color: #aaa6c0;
+  font-size: 0.85rem;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.12);
+}

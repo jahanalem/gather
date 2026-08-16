@@ -1,0 +1,76 @@
+@use "../abstracts/variables" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap");
+
+body {
+  color: $color-text;
+  font-family: $font-latin;
+  font-size: 1rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang="fa"] body {
+  font-family: $font-persian;
+  line-height: 1.85;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+html[lang="fa"] h1,
+html[lang="fa"] h2,
+html[lang="fa"] h3,
+html[lang="fa"] h4 {
+  line-height: 1.45;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 3.35rem);
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: clamp(1.65rem, 4vw, 2.25rem);
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+html[lang="fa"] h1,
+html[lang="fa"] h2,
+html[lang="fa"] h3 {
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  color: $color-primary;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+html[lang="fa"] .eyebrow {
+  letter-spacing: 0;
+}
+
+.lead {
+  color: $color-text-soft;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+}
+
+.text-soft {
+  color: $color-text-soft;
+}
+
+.text-small {
+  font-size: 0.875rem;
+}

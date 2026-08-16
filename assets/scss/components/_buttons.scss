@@ -1,0 +1,137 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  gap: 0.5rem;
+  padding: 0.72rem 1.15rem;
+  color: #fff;
+  font-weight: 750;
+  line-height: 1.2;
+  text-align: center;
+  background: $color-primary;
+  border: 1px solid $color-primary;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background $transition, border-color $transition, transform $transition, box-shadow $transition;
+}
+
+.button:hover {
+  background: $color-primary-dark;
+  border-color: $color-primary-dark;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(67, 56, 202, 0.2);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:focus-visible {
+  @include focus-ring;
+}
+
+.button:disabled,
+.button.is-disabled {
+  color: #9ca3af;
+  background: #e5e7eb;
+  border-color: #e5e7eb;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button--secondary {
+  color: $color-primary-dark;
+  background: $color-primary-soft;
+  border-color: transparent;
+}
+
+.button--secondary:hover {
+  color: #fff;
+}
+
+.button--outline {
+  color: $color-text;
+  background: #fff;
+  border-color: $color-border;
+}
+
+.button--outline:hover {
+  color: $color-primary-dark;
+  background: $color-primary-soft;
+  border-color: #c9c4fb;
+}
+
+.button--danger {
+  color: $color-error;
+  background: #fff;
+  border-color: #fecaca;
+}
+
+.button--danger:hover {
+  color: #fff;
+  background: $color-error;
+  border-color: $color-error;
+}
+
+.button--ghost {
+  min-height: 44px;
+  color: $color-primary-dark;
+  background: transparent;
+  border-color: transparent;
+}
+
+.button--ghost:hover {
+  color: $color-primary-dark;
+  background: $color-primary-soft;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.button--full {
+  width: 100%;
+}
+
+.icon-button {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: $color-text;
+  background: #fff;
+  border: 1px solid $color-border;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color $transition, background $transition, transform $transition;
+}
+
+.icon-button:hover,
+.icon-button[aria-pressed="true"] {
+  color: $color-coral;
+  background: $color-coral-soft;
+  transform: scale(1.04);
+}
+
+.icon-button svg,
+.button svg {
+  width: 19px;
+  height: 19px;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: $color-primary-dark;
+  font-weight: 750;
+}
+
+.link-arrow svg {
+  width: 18px;
+  height: 18px;
+}
