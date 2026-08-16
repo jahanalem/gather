@@ -1,0 +1,72 @@
+@use "../abstracts/variables" as *;
+
+.toast-region {
+  position: fixed;
+  inset-block-start: 88px;
+  inset-inline-end: 1rem;
+  z-index: 200;
+  display: grid;
+  width: min(calc(100% - 2rem), 380px);
+  gap: 0.5rem;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  background: #fff;
+  border: 1px solid $color-border;
+  border-inline-start: 4px solid $color-teal;
+  border-radius: 12px;
+  box-shadow: $shadow-md;
+  animation: toast-in 200ms ease both;
+}
+
+.toast--error {
+  border-inline-start-color: $color-error;
+}
+
+.toast svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  color: $color-teal;
+}
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  color: #096b5e;
+  background: $color-teal-soft;
+  border: 1px solid #b5e5da;
+  border-radius: 12px;
+}
+
+.alert--warning {
+  color: $color-warning;
+  background: $color-warning-soft;
+  border-color: #f7d7a0;
+}
+
+.alert--error {
+  color: $color-error;
+  background: $color-error-soft;
+  border-color: #fecaca;
+}
+
+.alert svg {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 auto;
+  margin-block-start: 0.1rem;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}

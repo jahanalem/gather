@@ -1,0 +1,88 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.mobile-nav {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 45;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 0.35rem max(0.25rem, env(safe-area-inset-right)) calc(0.35rem + env(safe-area-inset-bottom)) max(0.25rem, env(safe-area-inset-left));
+  background: rgba(255, 255, 255, 0.98);
+  border-block-start: 1px solid $color-border;
+  box-shadow: 0 -8px 24px rgba(31, 41, 55, 0.08);
+
+  @include from(900px) {
+    display: none;
+  }
+}
+
+.mobile-nav a {
+  display: grid;
+  min-width: 0;
+  min-height: 54px;
+  place-items: center;
+  gap: 0.1rem;
+  padding: 0.2rem;
+  color: $color-text-soft;
+  font-size: clamp(0.61rem, 2.5vw, 0.72rem);
+  font-weight: 650;
+  border-radius: 10px;
+}
+
+.mobile-nav a[aria-current="page"] {
+  color: $color-primary-dark;
+  background: $color-primary-soft;
+}
+
+.mobile-nav svg {
+  width: 21px;
+  height: 21px;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  padding-block: 1.3rem;
+  color: $color-text-soft;
+  font-size: 0.86rem;
+}
+
+.breadcrumb svg {
+  width: 14px;
+  height: 14px;
+}
+
+html[dir="rtl"] .directional-icon {
+  transform: scaleX(-1);
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  overflow-x: auto;
+  background: $color-surface-muted;
+  border: 1px solid $color-border;
+  border-radius: 14px;
+}
+
+.tabs [role="tab"] {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding-inline: 1rem;
+  color: $color-text-soft;
+  font-weight: 700;
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.tabs [role="tab"][aria-selected="true"] {
+  color: $color-primary-dark;
+  background: #fff;
+  box-shadow: $shadow-sm;
+}
