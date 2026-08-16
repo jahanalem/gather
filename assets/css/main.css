@@ -957,9 +957,9 @@ html[dir=rtl] .directional-icon {
   border-radius: 18px;
   box-shadow: 0 14px 35px rgba(41, 34, 96, 0.11);
 }
-@media (min-width: 820px) {
+@media (min-width: 600px) {
   .search-bar {
-    grid-template-columns: 1.5fr 1.1fr 1fr auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: end;
   }
 }
@@ -1439,7 +1439,7 @@ html[dir=rtl] .directional-icon {
   background: rgba(23, 20, 38, 0.52);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 180ms ease, visibility 180ms ease;
+  transition: opacity 180ms ease, visibility 0s linear 180ms;
 }
 
 .modal {
@@ -1451,6 +1451,7 @@ html[dir=rtl] .directional-icon {
 .drawer.is-open {
   opacity: 1;
   visibility: visible;
+  transition-delay: 0s;
 }
 
 .modal__dialog {
@@ -2295,6 +2296,11 @@ html[dir=rtl] .hero__image {
 
 .switch input:checked + span {
   background: #5b4bdb;
+}
+
+.switch input:focus-visible + span {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(91, 75, 219, 0.18);
 }
 
 .switch input:checked + span::after {

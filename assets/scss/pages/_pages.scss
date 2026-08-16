@@ -678,6 +678,10 @@ html[dir="rtl"] .hero__image {
   background: $color-primary;
 }
 
+.switch input:focus-visible + span {
+  @include focus-ring;
+}
+
 .switch input:checked + span::after {
   inset-inline-start: calc(100% - 24px);
 }

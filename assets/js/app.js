@@ -18,6 +18,7 @@
   };
 
   const page = document.body.dataset.page || "home";
+  const isHostPage = ["host-dashboard", "create-experience", "host-profile"].includes(page);
   const headerTarget = document.querySelector("[data-component='header']");
   const footerTarget = document.querySelector("[data-component='footer']");
 
@@ -25,7 +26,7 @@
     ["explore", "explore.html", "Entdecken", "کشف تجربه‌ها"],
     ["categories", "index.html#categories", "Kategorien", "دسته‌بندی‌ها"],
     ["bookings", "my-bookings.html", "Meine Buchungen", "رزروهای من"],
-    ["host-dashboard", "host-dashboard.html", "Gastgeber werden", "میزبان شوید"],
+    ["host-dashboard", "host-dashboard.html", isHostPage ? "Gastgeber-Dashboard" : "Gastgeber werden", isHostPage ? "داشبورد میزبان" : "میزبان شوید"],
     ["login", "login.html", "Anmelden", "ورود"]
   ];
 
@@ -68,11 +69,11 @@
             </div>
             <button class="header-icon" type="button" data-toast data-de-message="Du hast zwei neue Benachrichtigungen." data-fa-message="شما دو اعلان جدید دارید." aria-label="Benachrichtigungen" data-de-aria="Benachrichtigungen" data-fa-aria="اعلان‌ها">${icons.bell}<span class="header-icon__dot"></span></button>
             <a class="header-icon" href="profile.html" aria-label="Profil öffnen" data-de-aria="Profil öffnen" data-fa-aria="باز کردن پروفایل"><img class="avatar avatar--sm" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=96&q=80" alt="Profilbild von Amir" data-de-alt="Profilbild von Amir" data-fa-alt="تصویر پروفایل امیر"></a>
-            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen" data-de-aria="Menü öffnen" data-fa-aria="باز کردن منو">${icons.menu}</button>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menü öffnen" data-de-aria="Menü öffnen" data-fa-aria="باز کردن منو" data-de-close-aria="Menü schließen" data-fa-close-aria="بستن منو">${icons.menu}</button>
           </div>
         </div>
       </header>
-      <div class="mobile-menu" id="mobile-menu"><nav aria-label="Mobile Navigation" data-de-aria="Mobile Navigation" data-fa-aria="منوی موبایل">${mobileLinks}</nav></div>
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert><nav aria-label="Mobile Navigation" data-de-aria="Mobile Navigation" data-fa-aria="منوی موبایل">${mobileLinks}</nav></div>
       <nav class="mobile-nav" aria-label="Mobile Hauptnavigation" data-de-aria="Mobile Hauptnavigation" data-fa-aria="منوی اصلی موبایل">${bottomLinks}</nav>`;
   }
 
@@ -85,7 +86,7 @@
             <p data-de="Erlebnisse entdecken. Menschen kennenlernen. Gemeinsam erleben." data-fa="تجربه‌های تازه را کشف کن. آدم‌های جدید را بشناس. با هم همراه شویم.">Erlebnisse entdecken. Menschen kennenlernen. Gemeinsam erleben.</p>
           </div>
           <div><h2 data-de="Entdecken" data-fa="کشف کنید">Entdecken</h2><ul><li><a href="explore.html" data-de="Alle Erlebnisse" data-fa="همه تجربه‌ها">Alle Erlebnisse</a></li><li><a href="index.html#categories" data-de="Kategorien" data-fa="دسته‌بندی‌ها">Kategorien</a></li><li><a href="host-profile.html" data-de="Vertrauenswürdige Gastgeber" data-fa="میزبان‌های قابل اعتماد">Vertrauenswürdige Gastgeber</a></li></ul></div>
-          <div><h2 data-de="Gastgeber" data-fa="میزبان">Gastgeber</h2><ul><li><a href="create-experience.html" data-de="Erlebnis erstellen" data-fa="ساخت تجربه">Erlebnis erstellen</a></li><li><a href="host-dashboard.html" data-de="Gastgeber-Dashboard" data-fa="داشبورد میزبان">Gastgeber-Dashboard</a></li><li><a href="ui-states.html" data-de="UI-Zustände" data-fa="وضعیت‌های رابط">UI-Zustände</a></li></ul></div>
+          <div><h2 data-de="Gastgeber" data-fa="میزبان">Gastgeber</h2><ul><li><a href="create-experience.html" data-de="Erlebnis erstellen" data-fa="ایجاد تجربه">Erlebnis erstellen</a></li><li><a href="host-dashboard.html" data-de="Gastgeber-Dashboard" data-fa="داشبورد میزبان">Gastgeber-Dashboard</a></li><li><a href="ui-states.html" data-de="UI-Zustände" data-fa="وضعیت‌های رابط">UI-Zustände</a></li></ul></div>
           <div><h2 data-de="Sicherheit" data-fa="امنیت">Sicherheit</h2><ul><li><a href="experience-details.html#cancellation" data-de="Stornierung" data-fa="لغو رزرو">Stornierung</a></li><li><a href="profile.html#privacy" data-de="Datenschutz" data-fa="حریم خصوصی">Datenschutz</a></li><li><a href="ui-states.html#community" data-de="Community-Richtlinien" data-fa="قوانین جامعه">Community-Richtlinien</a></li></ul></div>
         </div>
         <div class="site-footer__bottom"><span>© 2026 Gather.</span> <span data-de="Ein UI-Prototyp für echte Begegnungen." data-fa="نمونه رابط کاربری برای دیدارهای واقعی.">Ein UI-Prototyp für echte Begegnungen.</span></div>
@@ -103,8 +104,15 @@
   }
 
   function localValue(element, key, language) {
-    const suffix = language === "fa" ? "Fa" : "De";
-    return element.dataset[`${suffix}${key}`] || "";
+    const prefix = language === "fa" ? "fa" : "de";
+    return element.dataset[`${prefix}${key}`] || "";
+  }
+
+  function updateMenuButtonLabel(button, language = currentLanguage()) {
+    if (!button) return;
+    const key = button.getAttribute("aria-expanded") === "true" ? "CloseAria" : "Aria";
+    const value = localValue(button, key, language);
+    if (value) button.setAttribute("aria-label", value);
   }
 
   function applyLanguage(language) {
@@ -119,19 +127,21 @@
     });
     ["placeholder", "aria", "alt", "title"].forEach((attribute) => {
       document.querySelectorAll(`[data-de-${attribute}][data-fa-${attribute}]`).forEach((element) => {
+        if (attribute === "title" && element === document.body) return;
         const value = localValue(element, attribute.charAt(0).toUpperCase() + attribute.slice(1), language);
         const name = attribute === "aria" ? "aria-label" : attribute;
-        element.setAttribute(name, value);
+        if (value) element.setAttribute(name, value);
       });
     });
     document.querySelectorAll("[data-de-value][data-fa-value]").forEach((element) => {
       element.value = isPersian ? element.dataset.faValue : element.dataset.deValue;
     });
-    document.querySelectorAll("[data-language]").forEach((button) => {
+    document.querySelectorAll("button[data-language]").forEach((button) => {
       button.setAttribute("aria-pressed", String(button.dataset.language === language));
     });
     const title = isPersian ? document.body.dataset.faTitle : document.body.dataset.deTitle;
     if (title) document.title = `${title} | Gather`;
+    updateMenuButtonLabel(document.querySelector(".menu-toggle"), language);
   }
 
   function showToast(message, type = "success") {
@@ -144,24 +154,83 @@
     window.setTimeout(() => toast.remove(), 3600);
   }
 
-  function closeOverlays() {
-    document.querySelectorAll(".modal.is-open, .drawer.is-open").forEach((overlay) => {
-      overlay.classList.remove("is-open");
-      overlay.setAttribute("aria-hidden", "true");
+  const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const overlayOpeners = new WeakMap();
+  let activeOverlay = null;
+
+  function focusableElements(overlay) {
+    return [...overlay.querySelectorAll(focusableSelector)].filter((element) => !element.hidden && element.getAttribute("aria-hidden") !== "true");
+  }
+
+  function openOverlay(overlay, trigger) {
+    if (!overlay) return;
+    if (activeOverlay && activeOverlay !== overlay) closeOverlay(activeOverlay, false);
+    if (trigger) overlayOpeners.set(overlay, trigger);
+    overlay.inert = false;
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+    if (overlay.matches(".modal, .drawer")) document.body.classList.add("no-scroll");
+    activeOverlay = overlay;
+    const menuButton = overlay.id === "mobile-menu" ? document.querySelector(".menu-toggle") : null;
+    if (menuButton) {
+      menuButton.setAttribute("aria-expanded", "true");
+      updateMenuButtonLabel(menuButton);
+    }
+    window.requestAnimationFrame(() => {
+      if (activeOverlay !== overlay || overlay.getAttribute("aria-hidden") === "true") return;
+      const firstFocusable = focusableElements(overlay)[0];
+      if (firstFocusable) firstFocusable.focus({ preventScroll: true });
+      else {
+        overlay.setAttribute("tabindex", "-1");
+        overlay.focus({ preventScroll: true });
+      }
     });
-    document.body.classList.remove("no-scroll");
+  }
+
+  function closeOverlay(overlay, restoreFocus = true) {
+    if (!overlay) return;
+    const opener = overlayOpeners.get(overlay);
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    overlay.inert = true;
+    if (overlay.id === "mobile-menu") {
+      const menuButton = document.querySelector(".menu-toggle");
+      menuButton?.setAttribute("aria-expanded", "false");
+      updateMenuButtonLabel(menuButton);
+    }
+    if (activeOverlay === overlay) activeOverlay = null;
+    if (!document.querySelector(".modal.is-open, .drawer.is-open")) document.body.classList.remove("no-scroll");
+    if (restoreFocus && opener?.isConnected) opener.focus({ preventScroll: true });
+  }
+
+  function closeOverlays() {
+    if (activeOverlay) closeOverlay(activeOverlay);
+  }
+
+  function activateTab(tab, moveFocus = false) {
+    const tablist = tab?.closest("[role='tablist']");
+    const scope = tablist?.closest("[data-tabs]");
+    if (!tablist || !scope) return;
+    tablist.querySelectorAll("[role='tab']").forEach((item) => {
+      const selected = item === tab;
+      item.setAttribute("aria-selected", String(selected));
+      item.setAttribute("tabindex", selected ? "0" : "-1");
+    });
+    scope.querySelectorAll("[role='tabpanel']").forEach((panel) => {
+      panel.hidden = panel.id !== tab.getAttribute("aria-controls");
+    });
+    if (moveFocus) tab.focus();
   }
 
   document.addEventListener("click", (event) => {
-    const languageButton = event.target.closest("[data-language]");
+    const languageButton = event.target.closest("button[data-language]");
     if (languageButton) applyLanguage(languageButton.dataset.language);
 
     const menuButton = event.target.closest(".menu-toggle");
     if (menuButton) {
       const menu = document.getElementById("mobile-menu");
-      const open = !menu.classList.contains("is-open");
-      menu.classList.toggle("is-open", open);
-      menuButton.setAttribute("aria-expanded", String(open));
+      if (menu.classList.contains("is-open")) closeOverlay(menu);
+      else openOverlay(menu, menuButton);
     }
 
     const favourite = event.target.closest("[data-favourite]");
@@ -180,34 +249,21 @@
     const drawerButton = event.target.closest("[data-open-drawer]");
     if (drawerButton) {
       const drawer = document.getElementById(drawerButton.dataset.openDrawer);
-      if (drawer) {
-        drawer.classList.add("is-open");
-        drawer.setAttribute("aria-hidden", "false");
-        document.body.classList.add("no-scroll");
-        drawer.querySelector("button, input, select")?.focus();
-      }
+      openOverlay(drawer, drawerButton);
     }
 
     const modalButton = event.target.closest("[data-open-modal]");
     if (modalButton) {
       const modal = document.getElementById(modalButton.dataset.openModal);
-      if (modal) {
-        modal.classList.add("is-open");
-        modal.setAttribute("aria-hidden", "false");
-        document.body.classList.add("no-scroll");
-        modal.querySelector("button, input, a")?.focus();
-      }
+      openOverlay(modal, modalButton);
     }
 
-    if (event.target.closest("[data-close-overlay]") || (event.target.classList.contains("modal") || event.target.classList.contains("drawer"))) closeOverlays();
+    const closeButton = event.target.closest("[data-close-overlay]");
+    if (closeButton) closeOverlay(closeButton.closest(".modal, .drawer, .mobile-menu"));
+    else if (event.target.matches(".modal, .drawer")) closeOverlay(event.target);
 
     const tab = event.target.closest("[role='tab']");
-    if (tab) {
-      const tablist = tab.closest("[role='tablist']");
-      tablist.querySelectorAll("[role='tab']").forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
-      const scope = tablist.closest("[data-tabs]");
-      scope.querySelectorAll("[role='tabpanel']").forEach((panel) => { panel.hidden = panel.id !== tab.getAttribute("aria-controls"); });
-    }
+    if (tab) activateTab(tab);
 
     const accordion = event.target.closest(".accordion__button");
     if (accordion) {
@@ -265,16 +321,45 @@
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeOverlays();
+    const tab = event.target.closest?.("[role='tab']");
+    if (tab && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+      const tabs = [...tab.closest("[role='tablist']").querySelectorAll("[role='tab']")];
+      const current = tabs.indexOf(tab);
+      const isRtl = document.documentElement.dir === "rtl";
+      let next = current;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = tabs.length - 1;
+      if (event.key === "ArrowRight") next = (current + (isRtl ? -1 : 1) + tabs.length) % tabs.length;
+      if (event.key === "ArrowLeft") next = (current + (isRtl ? 1 : -1) + tabs.length) % tabs.length;
+      activateTab(tabs[next], true);
+      event.preventDefault();
+      return;
+    }
+    if (event.key === "Escape" && activeOverlay) {
+      closeOverlays();
+      event.preventDefault();
+      return;
+    }
     if (event.key === "Tab") {
-      const overlay = document.querySelector(".modal.is-open, .drawer.is-open");
+      const overlay = activeOverlay?.classList.contains("is-open") ? activeOverlay : null;
       if (!overlay) return;
-      const focusable = [...overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')];
-      if (!focusable.length) return;
+      const focusable = focusableElements(overlay);
+      if (!focusable.length) {
+        overlay.focus({ preventScroll: true });
+        event.preventDefault();
+        return;
+      }
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
+      if (!overlay.contains(document.activeElement)) { first.focus(); event.preventDefault(); return; }
       if (event.shiftKey && document.activeElement === first) { last.focus(); event.preventDefault(); }
       if (!event.shiftKey && document.activeElement === last) { first.focus(); event.preventDefault(); }
+    }
+  });
+
+  document.addEventListener("focusin", (event) => {
+    if (activeOverlay?.classList.contains("is-open") && !activeOverlay.contains(event.target)) {
+      (focusableElements(activeOverlay)[0] || activeOverlay).focus({ preventScroll: true });
     }
   });
 
@@ -315,6 +400,22 @@
   }
 
   document.querySelectorAll("[data-step-form]").forEach((form) => showStep(form, Number(form.dataset.currentStep || 0)));
+
+  document.querySelectorAll("[role='tablist']").forEach((tablist) => {
+    const selected = tablist.querySelector("[role='tab'][aria-selected='true']") || tablist.querySelector("[role='tab']");
+    activateTab(selected);
+  });
+
+  document.querySelectorAll(".modal, .drawer, .mobile-menu").forEach((overlay) => {
+    if (!overlay.classList.contains("is-open")) {
+      overlay.inert = true;
+      overlay.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  document.querySelectorAll("svg:not([aria-hidden]), .category-card__icon, .state-icon, .stat-card__icon, .success-panel__icon").forEach((element) => {
+    element.setAttribute("aria-hidden", "true");
+  });
 
   document.querySelectorAll(".prototype-form").forEach((form) => {
     form.addEventListener("submit", (event) => {

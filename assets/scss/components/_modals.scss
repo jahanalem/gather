@@ -9,7 +9,7 @@
   background: rgba(23, 20, 38, 0.52);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 180ms ease, visibility 180ms ease;
+  transition: opacity 180ms ease, visibility 0s linear 180ms;
 }
 
 .modal {
@@ -21,6 +21,7 @@
 .drawer.is-open {
   opacity: 1;
   visibility: visible;
+  transition-delay: 0s;
 }
 
 .modal__dialog {
